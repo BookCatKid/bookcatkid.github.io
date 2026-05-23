@@ -24,6 +24,13 @@
 
     const featured = ["TablissNG", "flavortui"];
     const others = ["Tablytics", "shedulegen", "LLSP3-Extractor"];
+
+    let langLines = '';
+    if (data.hackatime) {
+      langLines = data.hackatime.languages.slice(0, 6).map(l =>
+        `    ${l.name.padEnd(14)}${l.text.padStart(9)}  (${l.percent.toFixed(1)}%)`
+      ).join('\n');
+    }
 </script>
 
 <h1>Simon Roff // BookCatKid</h1>
@@ -87,12 +94,10 @@
 {#if data.hackatime}
     <h2>hackatime</h2>
 
-    <pre>
-  total tracked: {data.hackatime.human_readable_total}
+    <pre>  total tracked: {data.hackatime.human_readable_total}
   daily avg:     {data.hackatime.human_readable_daily_average}
-  top langs:{#each data.hackatime.languages.slice(0, 6) as lang}
-    {lang.name.padEnd(14)}{lang.text.padStart(9)}  ({lang.percent.toFixed(1)}%){/each}
-</pre>
+    top langs:
+{langLines}</pre>
 {/if}
 
 <h2>projects</h2>
@@ -111,7 +116,7 @@
             >
                 {name}
             </a>
-            <span class="project-desc">— {r.description}</span>
+            <span class="project-desc">{r.description || 'no description set'}</span>
         </div>
         <div class="project-buttons">
             <a href={r.html_url} target="_blank" rel="noopener noreferrer">
@@ -141,7 +146,7 @@
             <a href={r.html_url} target="_blank" rel="noopener noreferrer"
                 >{name}</a
             >
-            — {r.description}
+            {r.description || 'no description set'}
         </li>
     {/each}
 </ul>
@@ -172,6 +177,21 @@
 
 <p><i>last updated: {lastUpdated}</i></p>
 
+<hr />
+
+<h2>cats</h2>
+
+<p>I LOVE cats. I have two of them and they're the best.</p>
+
+<p>Here are pictures of one of them:</p>
+
+<div class="cat-grid">
+  <img src="/cat1.jpeg" alt="cat1" />
+  <img src="/cat2.jpeg" alt="cat2" />
+  <img src="/cat3.jpeg" alt="cat3" />
+  <img src="/cat4.jpeg" alt="cat4" />
+</div>
+
 <style>
     h1 {
         font-size: 16px;
@@ -184,7 +204,7 @@
         font-size: 14px;
         font-weight: bold;
         color: var(--accent);
-        margin: 16px 0 6px 0;
+        margin: 10px 0;
     }
 
     h3 {
@@ -200,7 +220,7 @@
 
     pre {
         color: var(--accent);
-        margin: 6px 0;
+        margin: 0;
     }
 
     hr {
@@ -246,6 +266,19 @@
 
     .project-buttons img {
         display: block;
+    }
+
+    .cat-grid {
+        display: flex;
+        gap: 6px;
+        margin: 8px 0;
+        overflow-x: auto;
+    }
+
+    .cat-grid img {
+        display: block;
+        height: 120px;
+        width: auto;
     }
 
     .fun-btn {
