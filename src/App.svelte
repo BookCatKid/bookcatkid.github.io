@@ -186,10 +186,10 @@
 <p>Here are pictures of one of them:</p>
 
 <div class="cat-grid">
-  <img src="/cat1.jpeg" alt="cat1" />
-  <img src="/cat2.jpeg" alt="cat2" />
-  <img src="/cat3.jpeg" alt="cat3" />
-  <img src="/cat4.jpeg" alt="cat4" />
+  <img src="/cat1.jpeg" alt="Simon's cat" />
+  <img src="/cat2.jpeg" alt="Simon's cat" />
+  <img src="/cat3.jpeg" alt="Simon's cat" />
+  <img src="/cat4.jpeg" alt="Simon's cat" />
 </div>
 
 <style>
