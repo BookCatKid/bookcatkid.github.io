@@ -1,8 +1,6 @@
 <script>
     import data from "./projects-data.json";
 
-    let lastUpdated = data.fetched;
-
     const birthday = { month: 3, day: 27 };
     const now = new Date();
     let age = now.getFullYear() - 2011;

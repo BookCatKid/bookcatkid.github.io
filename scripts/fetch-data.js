@@ -1,17 +1,23 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_FILE = path.join(__dirname, '..', 'src', 'projects-data.json');
+const DATA_FILE = path.join(__dirname, "..", "src", "projects-data.json");
 
-const GH_USER = 'BookCatKid';
-const REPOS = ['TablissNG', 'flavortui', 'Tablytics', 'shedulegen', 'LLSP3-Extractor'];
-const HACKATIME_USER_ID = '23067';
+const GH_USER = "BookCatKid";
+const REPOS = [
+  "TablissNG",
+  "flavortui",
+  "Tablytics",
+  "shedulegen",
+  "LLSP3-Extractor",
+];
+const HACKATIME_USER_ID = "23067";
 
 async function fetchJSON(url, opts = {}) {
   const res = await fetch(url, {
-    headers: { 'User-Agent': 'bookcatkid-homepage', ...opts.headers },
+    headers: { "User-Agent": "bookcatkid-homepage", ...opts.headers },
     ...opts,
   });
   if (!res.ok) {
@@ -21,20 +27,20 @@ async function fetchJSON(url, opts = {}) {
 }
 
 async function main() {
-  const today = new Date().toISOString().split('T')[0];
-
   const [ghUser, ...ghRepos] = await Promise.all([
     fetchJSON(`https://api.github.com/users/${GH_USER}`),
-    ...REPOS.map((r) => fetchJSON(`https://api.github.com/repos/${GH_USER}/${r}`)),
+    ...REPOS.map((r) =>
+      fetchJSON(`https://api.github.com/repos/${GH_USER}/${r}`),
+    ),
   ]);
 
   const repos = {};
   for (const r of ghRepos) {
     repos[r.name] = {
-      description: r.description || '',
+      description: r.description || "",
       stars: r.stargazers_count,
       forks: r.forks_count,
-      language: r.language || '',
+      language: r.language || "",
       topics: r.topics || [],
       html_url: r.html_url,
     };
@@ -43,7 +49,7 @@ async function main() {
   let hackatime = null;
   try {
     const h = await fetchJSON(
-      `https://hackatime.hackclub.com/api/v1/users/${HACKATIME_USER_ID}/stats?start_date=2025-01-01&end_date=${today}`
+      `https://hackatime.hackclub.com/api/v1/users/${HACKATIME_USER_ID}/stats`,
     );
     if (h.data) {
       hackatime = {
@@ -59,16 +65,15 @@ async function main() {
       };
     }
   } catch (e) {
-    console.warn('hackatime fetch failed:', e.message);
+    console.warn("hackatime fetch failed:", e.message);
   }
 
   const data = {
-    fetched: today,
     user: {
       followers: ghUser.followers,
       following: ghUser.following,
       public_repos: ghUser.public_repos,
-      bio: ghUser.bio || '',
+      bio: ghUser.bio || "",
     },
     repos,
     hackatime,
@@ -80,6 +85,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('fetch-data failed:', err);
+  console.error("fetch-data failed:", err);
   process.exit(1);
 });
