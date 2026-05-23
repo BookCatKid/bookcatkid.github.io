@@ -1,0 +1,35 @@
+:root {
+  --bg: #222;
+  --fg: #ddd;
+  --dim: #888;
+  --link: #88f;
+  --accent: #0f0;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+#app {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #aaf;
+}
+
+a:visited {
+  color: #a6f;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "bookcatkid-dot-io",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/fetch-data.js && vite",
+    "build": "node scripts/fetch-data.js && vite build",
+    "preview": "vite preview",
+    "fetch-data": "node scripts/fetch-data.js"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.1.2",
+    "svelte": "^5.55.9",
+    "vite": "^8.0.14"
+  }
+}
