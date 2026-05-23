@@ -33,7 +33,10 @@
     }
 </script>
 
-<h1>Simon Roff // BookCatKid</h1>
+<div class="header">
+  <h1>Simon Roff // BookCatKid</h1>
+  <img src="/pfp.jpg" alt="Simon Roff" class="pfp" />
+</div>
 
 <hr />
 
@@ -175,8 +178,6 @@
 
 
 
-<p><i>last updated: {lastUpdated}</i></p>
-
 <hr />
 
 <h2>cats</h2>
@@ -193,11 +194,22 @@
 </div>
 
 <style>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .pfp {
+        width: 48px;
+        height: 48px;
+    }
+
     h1 {
         font-size: 16px;
         font-weight: bold;
         color: var(--fg);
-        margin: 0 0 4px 0;
+        margin: 0;
     }
 
     h2 {
@@ -236,10 +248,6 @@
 
     li {
         margin-bottom: 4px;
-    }
-
-    i {
-        color: var(--dim);
     }
 
     .project-row {

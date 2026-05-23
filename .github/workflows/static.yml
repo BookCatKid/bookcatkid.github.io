@@ -6,6 +6,10 @@ on:
   push:
     branches: ["main"]
 
+  # Refresh data and redeploy every 3 days
+  schedule:
+    - cron: "0 6 */3 * *"
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
